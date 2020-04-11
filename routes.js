@@ -4,14 +4,32 @@ const requestHandler = (req, res) => {
     const { url, method } = req;
 
     if (url === '/') {
+        res.setHeader('Content-Type', 'text/html');
+
         res.write(`
         <html>
             <head>
-                <title>Assignment</title>
+                <title>Assignment 1</title>
             </head>
             <body>
                 <h1>Some Greeting Text!</h1>
-                <ul>
+            </body>
+        </html>
+        `);
+
+        return res.end();
+    }
+
+    if (url === '/users') {
+        res.setHeader('Content-Type', 'text/html');
+
+        res.write(`
+        <html>
+            <head>
+                <title>Assignment 1</title>
+            </head>
+            <body>
+               <ul>
                     <li>User 1</li>
                     <li>User 2</li>                
                     <li>User 3</li>                
@@ -20,7 +38,7 @@ const requestHandler = (req, res) => {
                 </ul>
                 <form action="/create-user" method="POST">
                     <input name="username" type="text"/>
-                    <button>Submit</button>                    
+                    <button type="submit">Submit</button>                    
                 </form>
             </body>
         </html>
@@ -39,13 +57,11 @@ const requestHandler = (req, res) => {
         return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
             const username = parsedBody.split('=')[1];
-            fs.writeFile('username.txt', username, (err) => {
-                console.log(username);
+            console.log(username);
 
-                res.statusCode = 302;
-                res.setHeader('Location', '/');
-                return res.end();
-            });
+            res.statusCode = 302;
+            res.setHeader('Location', '/');
+            return res.end();
         });
     }
 };
