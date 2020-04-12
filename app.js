@@ -3,21 +3,24 @@ const express = require('express');
 const app = express();
 
 app.use('/', (req, res, next) => {
-    console.log('Always');
+    console.log('Log 1');
     next();
 });
 
-app.use('/add-product', (req, res, next) => {
-    console.log('In another middleware!');
+app.use('/', (req, res, next) => {
+    console.log('Log 2');
+    next();
+});
+
+app.use('/users', (req, res, next) => {
     res.send(`
-        <h1>Add Product</h1>
+        <h1>Users</h1>
     `);
 });
 
 app.use('/', (req, res, next) => {
-    console.log('In another middleware!');
     res.send(`
-        <h1>Hello</h1>
+        <h1>Assignment 2</h1>
     `);
 });
 
