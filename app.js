@@ -2,12 +2,12 @@ const express = require('express');
 
 const app = express();
 
-app.use('/', (req, res, next) => {
+app.use((req, res, next) => {
     console.log('Log 1');
     next();
 });
 
-app.use('/', (req, res, next) => {
+app.use((req, res, next) => {
     console.log('Log 2');
     next();
 });
